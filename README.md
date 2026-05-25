@@ -50,7 +50,7 @@ Created a workflow `.github/workflows/devsecops-audit.yml` with:
 
 ---
 
-🔍 Security Pipeline
+ Security Pipeline
 The pipeline runs automatically on every push. It includes two main security stages:
 
 Secret Scanning with TruffleHog
@@ -62,7 +62,7 @@ If critical or high-severity vulnerabilities are found, the pipeline fails on pu
 
 StageInitial StatusFinal StatusSecret LeakExposedFixedSCA VulnerabilitiesCritical/HighRemediatedSBOM Generation-GeneratedPipeline StatusBrokenPassing
 
-🧠 Lessons Learned
+ Lessons Learned
 
 Secrets should never be committed to the codebase
 Outdated dependencies are one of the biggest sources of security risks
@@ -70,7 +70,7 @@ Tools like Trivy and TruffleHog are essential for Shift-Left Security
 The pipeline should act as a security gatekeeper
 Generating SBOMs is a recommended practice for compliance and governance
 
-🛡️ Tools Used
+ Tools Used
 
 GitHub Actions
 TruffleHog (Secret Scanning)
