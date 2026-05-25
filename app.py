@@ -1,12 +1,15 @@
-4. import os
-5. 
-6. # ERRO DE SEGURANÇA: Chave de API exposta diretamente no código (Secret Leak)
-7. AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7EXAMPLE"
-8. AWS_SECRET_ACCESS_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
-9. 
-10. def main():
-11.     print("Iniciando aplicação extremamente insegura...")
-12.     print(f"Conectando na AWS com a chave: {AWS_ACCESS_KEY_ID}")
-13. 
-14. if __name__ == "__main__":
-15.     main()
+import os
+
+# CORREÇÃO: Removendo a chave mock e usando variável de ambiente
+# No mundo real, essa chave estaria no GitHub Secrets ou em um Vault (GCP Secret Manager)
+AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID", "CHAVE_NAO_CONFIGURADA")
+
+def main():
+    print("Aplicação rodando de forma segura...")
+    if AWS_ACCESS_KEY == "CHAVE_NAO_CONFIGURADA":
+        print("Aviso: Variável de ambiente não encontrada.")
+    else:
+        print("Conectado com sucesso (Identidade protegida).")
+
+if __name__ == "__main__":
+    main()
