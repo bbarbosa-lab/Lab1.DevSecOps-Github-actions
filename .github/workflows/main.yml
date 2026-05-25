@@ -1,0 +1,28 @@
+name: DevSecOps-Audit
+
+on: [push]
+
+jobs:
+  Security-Scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # SCAN 1: Procura segredos no sistema de arquivos
+      - name: Secret Scan (TruffleHog)
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          extra_args: --only-verified
+
+      # SCAN 2: Procura bibliotecas inseguras (SCA)
+      - name: SCA Scan (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
